@@ -10,6 +10,7 @@ import Infrastructure from "./pages/Infrastructure";
 import WhyChooseUs from "./pages/WhyChooseUs";
 import Testimonials from "./pages/Testimonials";
 import Contact from "./pages/Contact";
+import Gallery from "./pages/Gallery";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 
