@@ -1,7 +1,7 @@
-import { Award, Users, Leaf, Heart } from "lucide-react";
+import { Award, Users, Leaf, Heart, Building2, User } from "lucide-react";
 
 const highlights = [
-  { icon: Award, label: "28+ Years of Experience" },
+  { icon: Award, label: "40+ Years of Experience" },
   { icon: Heart, label: "High Purity & Long Shelf Life" },
   { icon: Users, label: "Custom Aroma Solutions" },
   { icon: Leaf, label: "Environment Friendly Products" },
@@ -13,17 +13,63 @@ const AboutSection = () => (
       <div className="text-center mb-16">
         <p className="text-gold font-body tracking-widest uppercase text-sm mb-3">About Us</p>
         <h2 className="font-heading text-3xl md:text-5xl font-bold text-secondary mb-6">
-          Crafting Excellence Since 1996
+          Crafting Excellence Since 1984
         </h2>
         <div className="w-20 h-1 bg-gradient-gold mx-auto rounded-full" />
       </div>
 
+      <div className="max-w-4xl mx-auto mb-16">
+        <div className="grid md:grid-cols-2 gap-10 items-start">
+          <div>
+            <p className="font-body text-muted-foreground leading-relaxed text-lg mb-6">
+              Established in the year 1984, <strong className="text-secondary">M. M. Attarwala</strong> is one of the leading manufacturers and suppliers of an extensive array of Synthetic Perfumery Compounds and Aromatic Compounds. Based in Vadodara, Gujarat, we have been serving the fragrance industry for over 40 years with unwavering commitment to quality.
+            </p>
+            <p className="font-body text-muted-foreground leading-relaxed">
+              We use high-quality raw materials sourced from reliable vendors to ensure consistency and excellence. Our products are widely appreciated for their purity, reliability, skin-friendliness, and long-lasting fragrance. Our strong financial position and customer-focused approach have helped us build a loyal clientele across the Indian subcontinent.
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            {/* Founder Card */}
+            <div className="bg-card rounded-xl p-6 border border-border">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-14 h-14 rounded-full bg-gold/10 flex items-center justify-center">
+                  <User className="text-gold" size={28} />
+                </div>
+                <div>
+                  <h3 className="font-heading font-semibold text-secondary text-lg">Mr. Mohd. Rafiq Attarwala</h3>
+                  <p className="font-body text-gold text-sm">Founder & Proprietor</p>
+                </div>
+              </div>
+              <p className="font-body text-muted-foreground text-sm leading-relaxed">
+                Under the visionary leadership of Mr. Mohd. Rafiq Attarwala, M. M. Attarwala has grown from a small workshop to a trusted name in the synthetic perfumery industry, serving clients across the Indian subcontinent.
+              </p>
+            </div>
+
+            {/* Company Facts */}
+            <div className="bg-card rounded-xl p-6 border border-border">
+              <div className="flex items-center gap-3 mb-4">
+                <Building2 className="text-gold" size={22} />
+                <h3 className="font-heading font-semibold text-secondary">Company Facts</h3>
+              </div>
+              <ul className="space-y-2 font-body text-sm text-muted-foreground">
+                <li className="flex justify-between"><span>Established</span><span className="text-secondary font-medium">1984</span></li>
+                <li className="flex justify-between"><span>Nature of Business</span><span className="text-secondary font-medium">Manufacturer & Supplier</span></li>
+                <li className="flex justify-between"><span>Legal Status</span><span className="text-secondary font-medium">Proprietorship</span></li>
+                <li className="flex justify-between"><span>Location</span><span className="text-secondary font-medium">Vadodara, Gujarat</span></li>
+                <li className="flex justify-between"><span>Major Markets</span><span className="text-secondary font-medium">Indian Subcontinent</span></li>
+                <li className="flex justify-between"><span>GST No.</span><span className="text-secondary font-medium">24ABJPA6641D2Z4</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Our Team */}
       <div className="max-w-3xl mx-auto text-center mb-16">
-        <p className="font-body text-muted-foreground leading-relaxed text-lg mb-6">
-          M M Attarwala is a well-established name in the field of synthetic perfumery compounds and aromatic solutions. With over 28 years of industry experience, we specialize in manufacturing and supplying premium-grade fragrance compounds tailored to various applications.
-        </p>
+        <h3 className="font-heading text-2xl font-semibold text-secondary mb-4">Our Team</h3>
         <p className="font-body text-muted-foreground leading-relaxed">
-          We use high-quality raw materials sourced from reliable vendors to ensure consistency and excellence. Our products are widely appreciated for their purity, reliability, skin-friendliness, and long-lasting fragrance. Our strong financial position and customer-focused approach have helped us build a loyal clientele across industries.
+          Our team is the backbone of our organization. We have employed diligent professionals after strict examination of their skills and experience. These employees work in close coordination to achieve organizational goals, maintain cordial relations with clients, and manufacture a supreme quality range. Regular training keeps our team updated with the latest industry standards.
         </p>
       </div>
 

@@ -1,18 +1,21 @@
 import { useState } from "react";
-import { Phone, Mail, MapPin, CreditCard, Send } from "lucide-react";
+import { Phone, Mail, MapPin, CreditCard, Send, Clock } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
 
 const productOptions = [
   "Perfumes & Colognes",
+  "Attars & Fragrances",
   "Talcum Powder Fragrances",
   "Soap Fragrances",
+  "Cream & Lotion Aroma",
   "Detergents & Fabric Softeners",
   "Industrial Cleaners",
-  "Dhoop & Agarbatti",
+  "Dhoop & Agarbatti (Incense Sticks)",
   "Candles",
   "Spa Products",
   "Pan Masala & Supari Aromas",
+  "Crystal Glass Bottles",
   "Other",
 ];
 
@@ -77,27 +80,31 @@ const ContactSection = () => {
         <div className="grid lg:grid-cols-5 gap-12 max-w-6xl mx-auto">
           {/* Left: Contact Info */}
           <div className="lg:col-span-2 space-y-6">
-            <h3 className="font-heading text-2xl font-semibold text-secondary mb-4">M M Attarwala</h3>
+            <h3 className="font-heading text-2xl font-semibold text-secondary mb-4">M. M. Attarwala</h3>
 
             <div className="flex items-start gap-4">
               <Phone className="text-gold flex-shrink-0 mt-1" size={20} />
               <div>
-                <p className="font-body font-medium text-secondary">Phone</p>
-                <p className="font-body text-muted-foreground">(Add your number)</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-4">
-              <Mail className="text-gold flex-shrink-0 mt-1" size={20} />
-              <div>
-                <p className="font-body font-medium text-secondary">Email</p>
-                <p className="font-body text-muted-foreground">(Add email)</p>
+                <p className="font-body font-medium text-secondary">Contact Person</p>
+                <p className="font-body text-muted-foreground">Mr. Mohd. Rafiq Attarwala</p>
               </div>
             </div>
             <div className="flex items-start gap-4">
               <MapPin className="text-gold flex-shrink-0 mt-1" size={20} />
               <div>
                 <p className="font-body font-medium text-secondary">Address</p>
-                <p className="font-body text-muted-foreground">(Add address)</p>
+                <p className="font-body text-muted-foreground">
+                  Opposite Jamnabai Hospital,<br />
+                  Near Nazarbaug, Mandvi,<br />
+                  Vadodara, Gujarat – 390 017, India
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <Clock className="text-gold flex-shrink-0 mt-1" size={20} />
+              <div>
+                <p className="font-body font-medium text-secondary">Business Hours</p>
+                <p className="font-body text-muted-foreground">Mon – Sat: 9:00 AM – 7:00 PM</p>
               </div>
             </div>
 
@@ -114,6 +121,20 @@ const ContactSection = () => {
                   </li>
                 ))}
               </ul>
+            </div>
+
+            {/* Google Maps Embed */}
+            <div className="rounded-xl overflow-hidden border border-border mt-4">
+              <iframe
+                title="M M Attarwala Location"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.169!2d73.2!3d22.3!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sMandvi%2C%20Vadodara%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1700000000000"
+                width="100%"
+                height="200"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
           </div>
 
