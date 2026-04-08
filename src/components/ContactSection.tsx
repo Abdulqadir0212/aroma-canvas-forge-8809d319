@@ -69,7 +69,7 @@ const ContactSection = () => {
     }`;
 
   return (
-    <section id="contact" className="py-20 bg-card">
+    <section className="py-20 bg-card">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <p className="text-gold font-body tracking-widest uppercase text-sm mb-3">Get In Touch</p>
