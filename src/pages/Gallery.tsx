@@ -40,6 +40,7 @@ const galleryImages: GalleryImage[] = [
   { src: giftPackaging, alt: "Premium perfume gift packaging", title: "Gift Packaging", category: "Packaging" },
   { src: qualityTesting, alt: "Quality testing in laboratory", title: "Quality Control Lab", category: "Manufacturing" },
   { src: warehouse, alt: "Perfume compound storage warehouse", title: "Storage & Warehouse", category: "Manufacturing" },
+  { src: perfumeSprays, alt: "Luxury perfume bottles on display shelf", title: "Perfume Spray Collection", category: "Products" },
 ];
 
 const Gallery = () => {
