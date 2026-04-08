@@ -12,7 +12,7 @@ const HeroSection = () => (
     <div className="absolute inset-0 bg-gradient-brown opacity-70" />
     <div className="relative z-10 container mx-auto text-center px-4 py-32">
       <p className="animate-fade-in-up text-gold font-body tracking-[0.3em] uppercase text-sm mb-6">
-        Established Since 1996
+        Established Since 1984
       </p>
       <h1 className="animate-fade-in-up-delay-1 font-heading text-4xl md:text-6xl lg:text-7xl font-bold text-cream leading-tight mb-6">
         Premium Synthetic Perfumery
