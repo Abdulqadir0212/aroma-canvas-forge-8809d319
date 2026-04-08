@@ -5,6 +5,9 @@ const Footer = () => (
       <p className="font-body text-cream/60 text-sm">
         Premium Synthetic Perfumery & Aromatic Compounds
       </p>
+      <p className="font-body text-cream/40 text-xs mt-1">
+        Opp. Jamnabai Hospital, Near Nazarbaug, Mandvi, Vadodara – 390 017, Gujarat, India
+      </p>
       <div className="w-16 h-px bg-gold/30 mx-auto my-6" />
       <p className="font-body text-cream/40 text-xs">
         © {new Date().getFullYear()} M M Attarwala. All rights reserved.

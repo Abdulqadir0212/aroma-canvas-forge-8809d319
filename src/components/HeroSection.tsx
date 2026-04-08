@@ -20,7 +20,7 @@ const HeroSection = () => (
         <span className="text-gradient-gold">&amp; Aromatic Compounds</span>
       </h1>
       <p className="animate-fade-in-up-delay-2 font-body text-cream/80 text-lg md:text-xl max-w-2xl mx-auto mb-10">
-        Delivering Quality Fragrance Solutions for Over 28 Years
+        Delivering Quality Fragrance Solutions for Over 40 Years
       </p>
       <div className="animate-fade-in-up-delay-3 flex flex-wrap justify-center gap-4">
         <a
