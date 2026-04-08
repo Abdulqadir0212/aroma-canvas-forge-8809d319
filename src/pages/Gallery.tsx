@@ -16,6 +16,7 @@ import giftPackaging from "@/assets/gallery/gift-packaging.jpg";
 import storefront from "@/assets/gallery/storefront.jpg";
 import qualityTesting from "@/assets/gallery/quality-testing.jpg";
 import warehouse from "@/assets/gallery/warehouse.jpg";
+import perfumeSprays from "@/assets/gallery/perfume-sprays.jpg";
 
 const categories = ["All", "Products", "Shop", "Manufacturing", "Packaging"] as const;
 
