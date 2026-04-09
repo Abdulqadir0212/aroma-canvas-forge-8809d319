@@ -27,14 +27,14 @@ const About = () => {
               <div className="grid md:grid-cols-2 gap-10 items-start">
                 <div className="reveal-item opacity-0 translate-y-8 transition-all duration-700">
                   <p className="font-body text-muted-foreground leading-relaxed text-lg mb-6">
-                    Established in the year 1984, <strong className="text-secondary">M. M. Attarwala</strong> is one of the leading manufacturers and suppliers of an extensive array of Synthetic Perfumery Compounds and Aromatic Compounds. Based in Vadodara, Gujarat, we have been serving the fragrance industry for over 40 years with unwavering commitment to quality.
+                    Established in 1984, <strong className="text-secondary">M. M. Attarwala</strong> is a trusted fragrance house and one of the leading manufacturers of premium perfumery compounds, attars, and aromatic solutions. Based in Vadodara, Gujarat, we serve customers across Gujarat and Maharashtra.
                   </p>
                   <p className="font-body text-muted-foreground leading-relaxed">
-                    We use high-quality raw materials sourced from reliable vendors to ensure consistency and excellence. Our products are widely appreciated for their purity, reliability, skin-friendliness, and long-lasting fragrance. Our strong financial position and customer-focused approach have helped us build a loyal clientele across the Indian subcontinent.
+                    We are not a trendy brand — we are a mature, trust-driven fragrance house focused on quality, clarity, and long-term customer relationships. Every product is crafted using high-quality raw materials for purity and lasting performance.
                   </p>
                 </div>
 
-                <div className="space-y-6 reveal-item opacity-0 translate-y-8 transition-all duration-700 delay-200">
+                <div className="space-y-6 reveal-item opacity-0 translate-y-8 transition-all duration-700">
                   <div className="bg-card rounded-xl p-6 border border-border hover-scale">
                     <div className="flex items-center gap-4 mb-4">
                       <div className="w-14 h-14 rounded-full bg-gold/10 flex items-center justify-center">
@@ -46,7 +46,7 @@ const About = () => {
                       </div>
                     </div>
                     <p className="font-body text-muted-foreground text-sm leading-relaxed">
-                      Under the visionary leadership of Mr. Mohd. Rafiq Attarwala, M. M. Attarwala has grown from a small workshop to a trusted name in the synthetic perfumery industry, serving clients across the Indian subcontinent.
+                      Under the visionary leadership of Mr. Mohd. Rafiq Attarwala, M M Attarwala has grown from a small workshop to a trusted name in the fragrance industry, serving thousands of loyal customers.
                     </p>
                   </div>
 
@@ -57,10 +57,9 @@ const About = () => {
                     </div>
                     <ul className="space-y-2 font-body text-sm text-muted-foreground">
                       <li className="flex justify-between"><span>Established</span><span className="text-secondary font-medium">1984</span></li>
-                      <li className="flex justify-between"><span>Nature of Business</span><span className="text-secondary font-medium">Manufacturer & Supplier</span></li>
-                      <li className="flex justify-between"><span>Legal Status</span><span className="text-secondary font-medium">Proprietorship</span></li>
+                      <li className="flex justify-between"><span>Nature of Business</span><span className="text-secondary font-medium">Manufacturer & Retailer</span></li>
+                      <li className="flex justify-between"><span>Target Market</span><span className="text-secondary font-medium">Gujarat & Maharashtra</span></li>
                       <li className="flex justify-between"><span>Location</span><span className="text-secondary font-medium">Vadodara, Gujarat</span></li>
-                      <li className="flex justify-between"><span>Major Markets</span><span className="text-secondary font-medium">Indian Subcontinent</span></li>
                       <li className="flex justify-between"><span>GST No.</span><span className="text-secondary font-medium">24ABJPA6641D2Z4</span></li>
                     </ul>
                   </div>
@@ -68,19 +67,12 @@ const About = () => {
               </div>
             </div>
 
-            <div className="max-w-3xl mx-auto text-center mb-16 reveal-item opacity-0 translate-y-8 transition-all duration-700">
-              <h3 className="font-heading text-2xl font-semibold text-secondary mb-4">Our Team</h3>
-              <p className="font-body text-muted-foreground leading-relaxed">
-                Our team is the backbone of our organization. We have employed diligent professionals after strict examination of their skills and experience. These employees work in close coordination to achieve organizational goals, maintain cordial relations with clients, and manufacture a supreme quality range. Regular training keeps our team updated with the latest industry standards.
-              </p>
-            </div>
-
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {highlights.map((h, i) => (
                 <div
                   key={h.label}
-                  className={`reveal-item opacity-0 translate-y-8 transition-all duration-700 bg-card rounded-xl p-6 text-center border border-border hover:border-gold/40 hover-scale group`}
-                  style={{ transitionDelay: `${i * 100}ms` }}
+                  className="reveal-item opacity-0 translate-y-8 transition-all duration-700 bg-card rounded-xl p-6 text-center border border-border hover:border-gold/30 hover-scale group"
+                  style={{ transitionDelay: `${i * 80}ms` }}
                 >
                   <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-gold/10 flex items-center justify-center group-hover:bg-gold/20 transition-colors">
                     <h.icon className="text-gold" size={28} />
