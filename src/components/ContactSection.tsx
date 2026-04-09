@@ -87,6 +87,7 @@ const ContactSection = () => {
               <div>
                 <p className="font-body font-medium text-secondary">Contact Person</p>
                 <p className="font-body text-muted-foreground">Mr. Mohd. Rafiq Attarwala</p>
+                <a href="tel:+919724586101" className="font-body text-gold hover:underline">+91 97245 86101</a>
               </div>
             </div>
             <div className="flex items-start gap-4">
