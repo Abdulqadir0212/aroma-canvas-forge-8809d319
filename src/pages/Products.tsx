@@ -1,112 +1,112 @@
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
 import WhatsAppButton from "@/components/WhatsAppButton";
-import { Sparkles, Home, Flame, Flower, Droplets, Package, Wind, Palette } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Link } from "react-router-dom";
+import { ShoppingBag } from "lucide-react";
+import galleryAttar from "@/assets/gallery/attar-collection.jpg";
+import galleryPerfume from "@/assets/gallery/perfume-sprays.jpg";
+import galleryBottles from "@/assets/gallery/crystal-bottles.jpg";
+import galleryIncense from "@/assets/gallery/incense-products.jpg";
+import galleryOils from "@/assets/gallery/essential-oils.jpg";
+import galleryRose from "@/assets/gallery/rose-ingredients.jpg";
+import galleryGift from "@/assets/gallery/gift-packaging.jpg";
+import galleryShop from "@/assets/gallery/shop-interior.jpg";
+import galleryManufacturing from "@/assets/gallery/manufacturing.jpg";
 
-const categories = [
-  {
-    icon: Sparkles,
-    title: "Perfume Fragrances",
-    description: "33+ premium fragrances including Sandalwood, Chocolate, Passport, and designer-inspired scents.",
-    items: ["Sandalwood Perfume", "Chocolate Fragrance", "Perfume Passport", "Designer-Inspired Blends"],
-  },
-  {
-    icon: Droplets,
-    title: "Attars & Traditional Fragrances",
-    description: "Authentic attars crafted using traditional methods — Firdous, Dehnul, Jannatul, and more.",
-    items: ["Attar Full", "Attar T Rose", "Flower Oil Attar", "Fabric Attar", "Dehnul & Jannatul"],
-  },
-  {
-    icon: Palette,
-    title: "Beauty & Personal Care Aroma",
-    description: "Fragrances for creams, lotions, talcum powder, and soaps.",
-    items: ["Cream & Lotion Aroma", "Talcum Powder Fragrance", "Soap Fragrance"],
-  },
-  {
-    icon: Home,
-    title: "Home & Cleaning Products",
-    description: "Industrial-grade aromatic compounds for detergents, cleaners, and household items.",
-    items: ["Detergents & Fabric Softeners", "Industrial Cleaners", "Household Products"],
-  },
-  {
-    icon: Flame,
-    title: "Religious & Lifestyle",
-    description: "Premium fragrances for incense sticks, dhoop, oudh, and candles.",
-    items: ["Dhoop & Agarbatti", "Incense Sticks", "Oudh", "Candles"],
-  },
-  {
-    icon: Flower,
-    title: "Specialty Applications",
-    description: "Unique aromatic solutions for spa products and specialty industries.",
-    items: ["Spa Products", "Pan Masala & Supari Aromas"],
-  },
-  {
-    icon: Wind,
-    title: "Attar Fragrance Collection",
-    description: "Exclusive attar blends — Black Cobra, Green Musk, Bacool, Char Les, and more.",
-    items: ["Attar Black Cobra", "Attar Green Musk", "Attar G Sandal", "Attar Bacool", "Attar Pons"],
-  },
-  {
-    icon: Package,
-    title: "Crystal Glass Bottles",
-    description: "Premium crystal glass packaging for attars and perfumes.",
-    items: ["Cristal Bottles", "Attar Bottles", "Custom Packaging"],
-  },
+const products = [
+  { name: "Royal Oudh Attar", price: "₹1,299", image: galleryAttar, category: "Attar", longevity: "12+ Hours" },
+  { name: "Rose Premium Perfume", price: "₹899", image: galleryRose, category: "Perfume", longevity: "8+ Hours" },
+  { name: "Sandalwood Classic", price: "₹1,099", image: galleryPerfume, category: "Perfume", longevity: "10+ Hours" },
+  { name: "Crystal Attar Gift Set", price: "₹2,499", image: galleryBottles, category: "Gift Set", longevity: "12+ Hours" },
+  { name: "Firdous Premium Attar", price: "₹1,599", image: galleryOils, category: "Attar", longevity: "12+ Hours" },
+  { name: "Dehnul Oudh Blend", price: "₹1,899", image: galleryManufacturing, category: "Attar", longevity: "14+ Hours" },
+  { name: "Jannatul Firdous", price: "₹1,199", image: galleryShop, category: "Attar", longevity: "10+ Hours" },
+  { name: "Classic Incense Collection", price: "₹499", image: galleryIncense, category: "Incense", longevity: "4+ Hours" },
+  { name: "Premium Gift Box", price: "₹3,499", image: galleryGift, category: "Gift Set", longevity: "12+ Hours" },
+  { name: "Green Musk Attar", price: "₹999", image: galleryOils, category: "Attar", longevity: "8+ Hours" },
+  { name: "Black Cobra Attar", price: "₹1,399", image: galleryAttar, category: "Attar", longevity: "12+ Hours" },
+  { name: "Chocolate Perfume", price: "₹799", image: galleryPerfume, category: "Perfume", longevity: "6+ Hours" },
 ];
+
+const filters = ["All", "Attar", "Perfume", "Gift Set", "Incense"];
 
 const Products = () => {
   const revealRef = useScrollReveal();
+  const [activeFilter, setActiveFilter] = useState("All");
+
+  const filtered = activeFilter === "All" ? products : products.filter((p) => p.category === activeFilter);
 
   return (
     <>
       <Navbar />
-      <PageHeader subtitle="Our Products" title="Our Product Range" />
+      <PageHeader subtitle="Our Collection" title="Shop Premium Fragrances" />
 
       <div ref={revealRef}>
-        <section className="py-20 bg-background">
+        <section className="py-16 bg-background">
           <div className="container mx-auto px-4">
-            <p className="text-center font-body text-muted-foreground max-w-2xl mx-auto mb-16 reveal-item opacity-0 translate-y-8 transition-all duration-700">
-              We manufacture and supply a comprehensive range of synthetic perfumery compounds and aromatic solutions for diverse industries. All products are crafted with high-quality raw materials for purity and long-lasting performance.
+            <p className="text-center font-body text-muted-foreground max-w-xl mx-auto mb-10 reveal-item opacity-0 translate-y-8 transition-all duration-700">
+              A curated selection of our finest attars, perfumes, and aromatic products. Each crafted for purity and lasting impression.
             </p>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-              {categories.map((cat, i) => (
-                <div
-                  key={cat.title}
-                  className="reveal-item opacity-0 translate-y-8 transition-all duration-700 bg-card rounded-2xl p-8 border border-border hover:border-gold/40 hover:shadow-lg hover-scale group"
-                  style={{ transitionDelay: `${i * 80}ms` }}
+            {/* Filters */}
+            <div className="flex flex-wrap justify-center gap-2 mb-10 reveal-item opacity-0 translate-y-8 transition-all duration-700">
+              {filters.map((f) => (
+                <button
+                  key={f}
+                  onClick={() => setActiveFilter(f)}
+                  className={`font-body text-sm px-5 py-2 rounded-full transition-all ${
+                    activeFilter === f
+                      ? "bg-gradient-gold text-primary-foreground font-semibold"
+                      : "bg-card border border-border text-muted-foreground hover:border-gold/30"
+                  }`}
                 >
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center group-hover:bg-gold/20 transition-colors">
-                      <cat.icon className="text-gold" size={24} />
-                    </div>
-                    <h3 className="font-heading text-lg font-semibold text-secondary">{cat.title}</h3>
+                  {f}
+                </button>
+              ))}
+            </div>
+
+            {/* Product Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 max-w-6xl mx-auto">
+              {filtered.map((item, i) => (
+                <div
+                  key={item.name}
+                  className="reveal-item opacity-0 translate-y-8 transition-all duration-600 group bg-card rounded-xl overflow-hidden border border-border hover:border-gold/30 hover-scale"
+                  style={{ transitionDelay: `${i * 60}ms` }}
+                >
+                  <div className="relative aspect-square overflow-hidden">
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                    <span className="absolute top-3 left-3 bg-background/90 text-foreground font-body text-xs font-medium px-2.5 py-1 rounded-full">
+                      {item.category}
+                    </span>
                   </div>
-                  <p className="font-body text-muted-foreground text-sm mb-4 leading-relaxed">{cat.description}</p>
-                  <ul className="space-y-2">
-                    {cat.items.map((item) => (
-                      <li key={item} className="flex items-center gap-3 font-body text-sm text-muted-foreground">
-                        <span className="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="p-4">
+                    <h3 className="font-heading text-sm font-semibold text-secondary mb-1 line-clamp-1">{item.name}</h3>
+                    <p className="font-body text-muted-foreground text-xs mb-2">Lasts {item.longevity}</p>
+                    <div className="flex items-center justify-between">
+                      <p className="font-body text-gold font-bold text-lg">{item.price}</p>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
 
             <div className="text-center mt-16 reveal-item opacity-0 translate-y-8 transition-all duration-700">
               <p className="font-body text-muted-foreground mb-6">
-                Looking for a custom fragrance solution? We specialize in creating bespoke aromatic compounds tailored to your needs.
+                Looking for a specific fragrance? Reach out to us on WhatsApp for personalized recommendations.
               </p>
               <Link
                 to="/contact"
-                className="inline-block bg-gradient-gold text-secondary font-body font-semibold px-8 py-3 rounded-lg hover:opacity-90 transition-opacity"
+                className="inline-flex items-center gap-2 border-2 border-gold text-gold font-body font-semibold px-8 py-3 rounded-lg hover:bg-gold/5 transition-colors"
               >
-                Request Custom Quote
+                Contact Us
               </Link>
             </div>
           </div>
