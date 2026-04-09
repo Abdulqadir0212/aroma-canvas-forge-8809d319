@@ -16,13 +16,25 @@ export const useScrollReveal = () => {
           }
         });
       },
-      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+      { threshold: 0.05, rootMargin: "0px 0px -30px 0px" }
     );
 
-    const children = el.querySelectorAll(".reveal-item");
-    children.forEach((child) => observer.observe(child));
+    // Observe existing items
+    const observeAll = () => {
+      const children = el.querySelectorAll(".reveal-item:not(.revealed)");
+      children.forEach((child) => observer.observe(child));
+    };
 
-    return () => observer.disconnect();
+    observeAll();
+
+    // Watch for DOM changes (e.g. filter updates adding new items)
+    const mutation = new MutationObserver(() => observeAll());
+    mutation.observe(el, { childList: true, subtree: true });
+
+    return () => {
+      observer.disconnect();
+      mutation.disconnect();
+    };
   }, []);
 
   return ref;
