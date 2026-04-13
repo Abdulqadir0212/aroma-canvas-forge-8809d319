@@ -38,7 +38,10 @@ const Checkout = () => {
       const { data: { session } } = await supabase.auth.getSession();
       const userId = session?.user?.id;
 
-      const { data: order, error: orderErr } = await supabase.from("orders").insert({
+      const orderId = crypto.randomUUID();
+
+      const { error: orderErr } = await supabase.from("orders").insert({
+        id: orderId,
         user_id: userId || null,
         customer_name: form.customer_name,
         customer_email: form.customer_email || null,
@@ -52,7 +55,7 @@ const Checkout = () => {
         payment_method: "cod",
         status: "pending",
         payment_status: "pending",
-      }).select("id").single();
+      });
 
       if (orderErr) throw orderErr;
 
