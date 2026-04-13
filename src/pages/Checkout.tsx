@@ -60,7 +60,7 @@ const Checkout = () => {
       if (orderErr) throw orderErr;
 
       const orderItems = items.map((item) => ({
-        order_id: order.id,
+        order_id: orderId,
         product_id: item.product_id,
         product_name: item.name,
         quantity: item.quantity,
