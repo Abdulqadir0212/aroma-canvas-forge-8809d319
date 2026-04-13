@@ -14,7 +14,117 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      products: {
+        Row: {
+          active: boolean | null
+          category: string
+          created_at: string
+          description: string | null
+          id: string
+          image_url: string | null
+          is_bestseller: boolean | null
+          name: string
+          original_price: number | null
+          price: number
+          sort_order: number | null
+          tag: string | null
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean | null
+          category?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          is_bestseller?: boolean | null
+          name: string
+          original_price?: number | null
+          price?: number
+          sort_order?: number | null
+          tag?: string | null
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean | null
+          category?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          is_bestseller?: boolean | null
+          name?: string
+          original_price?: number | null
+          price?: number
+          sort_order?: number | null
+          tag?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      site_content: {
+        Row: {
+          created_at: string
+          id: string
+          key: string
+          section: string
+          sort_order: number | null
+          updated_at: string
+          value: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          key: string
+          section: string
+          sort_order?: number | null
+          updated_at?: string
+          value?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          key?: string
+          section?: string
+          sort_order?: number | null
+          updated_at?: string
+          value?: string | null
+        }
+        Relationships: []
+      }
+      testimonials: {
+        Row: {
+          active: boolean | null
+          created_at: string
+          id: string
+          location: string | null
+          name: string
+          rating: number
+          review: string
+          sort_order: number | null
+        }
+        Insert: {
+          active?: boolean | null
+          created_at?: string
+          id?: string
+          location?: string | null
+          name: string
+          rating?: number
+          review: string
+          sort_order?: number | null
+        }
+        Update: {
+          active?: boolean | null
+          created_at?: string
+          id?: string
+          location?: string | null
+          name?: string
+          rating?: number
+          review?: string
+          sort_order?: number | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
