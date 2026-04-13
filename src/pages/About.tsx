@@ -4,6 +4,8 @@ import PageHeader from "@/components/PageHeader";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { Award, Users, Leaf, Heart, Building2, User } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { useSiteContent, useCompanyFacts } from "@/hooks/useDynamicContent";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const highlights = [
   { icon: Award, label: "40+ Years of Experience" },
@@ -14,6 +16,8 @@ const highlights = [
 
 const About = () => {
   const revealRef = useScrollReveal();
+  const { data: about, isLoading: aboutLoading } = useSiteContent("about");
+  const { data: facts, isLoading: factsLoading } = useCompanyFacts();
 
   return (
     <>
@@ -26,12 +30,24 @@ const About = () => {
             <div className="max-w-4xl mx-auto mb-16">
               <div className="grid md:grid-cols-2 gap-10 items-start">
                 <div className="reveal-item opacity-0 translate-y-8 transition-all duration-700">
-                  <p className="font-body text-muted-foreground leading-relaxed text-lg mb-6">
-                    Established in 1984, <strong className="text-secondary">M. M. Attarwala</strong> is a trusted fragrance house and one of the leading manufacturers of premium perfumery compounds, attars, and aromatic solutions. Based in Vadodara, Gujarat, we serve customers across Gujarat and Maharashtra.
-                  </p>
-                  <p className="font-body text-muted-foreground leading-relaxed">
-                    We are not a trendy brand — we are a mature, trust-driven fragrance house focused on quality, clarity, and long-term customer relationships. Every product is crafted using high-quality raw materials for purity and lasting performance.
-                  </p>
+                  {aboutLoading ? (
+                    <div className="space-y-4">
+                      <Skeleton className="h-5 w-full" />
+                      <Skeleton className="h-5 w-full" />
+                      <Skeleton className="h-5 w-3/4" />
+                      <Skeleton className="h-5 w-full" />
+                      <Skeleton className="h-5 w-2/3" />
+                    </div>
+                  ) : (
+                    <>
+                      <p className="font-body text-muted-foreground leading-relaxed text-lg mb-6">
+                        {about?.intro}
+                      </p>
+                      <p className="font-body text-muted-foreground leading-relaxed">
+                        {about?.mission}
+                      </p>
+                    </>
+                  )}
                 </div>
 
                 <div className="space-y-6 reveal-item opacity-0 translate-y-8 transition-all duration-700">
@@ -41,12 +57,25 @@ const About = () => {
                         <User className="text-gold" size={28} />
                       </div>
                       <div>
-                        <h3 className="font-heading font-semibold text-secondary text-lg">Mr. Mohd. Rafiq Attarwala</h3>
-                        <p className="font-body text-gold text-sm">Founder & Proprietor</p>
+                        {aboutLoading ? (
+                          <>
+                            <Skeleton className="h-5 w-40 mb-1" />
+                            <Skeleton className="h-4 w-28" />
+                          </>
+                        ) : (
+                          <>
+                            <h3 className="font-heading font-semibold text-secondary text-lg">
+                              {about?.founder_name ?? "Mr. Mohd. Rafiq Attarwala"}
+                            </h3>
+                            <p className="font-body text-gold text-sm">
+                              {about?.founder_title ?? "Founder & Proprietor"}
+                            </p>
+                          </>
+                        )}
                       </div>
                     </div>
                     <p className="font-body text-muted-foreground text-sm leading-relaxed">
-                      Under the visionary leadership of Mr. Mohd. Rafiq Attarwala, M M Attarwala has grown from a small workshop to a trusted name in the fragrance industry, serving thousands of loyal customers.
+                      {aboutLoading ? <Skeleton className="h-16 w-full" /> : about?.founder_bio}
                     </p>
                   </div>
 
@@ -56,11 +85,19 @@ const About = () => {
                       <h3 className="font-heading font-semibold text-secondary">Company Facts</h3>
                     </div>
                     <ul className="space-y-2 font-body text-sm text-muted-foreground">
-                      <li className="flex justify-between"><span>Established</span><span className="text-secondary font-medium">1984</span></li>
-                      <li className="flex justify-between"><span>Nature of Business</span><span className="text-secondary font-medium">Manufacturer & Retailer</span></li>
-                      <li className="flex justify-between"><span>Target Market</span><span className="text-secondary font-medium">Gujarat & Maharashtra</span></li>
-                      <li className="flex justify-between"><span>Location</span><span className="text-secondary font-medium">Vadodara, Gujarat</span></li>
-                      <li className="flex justify-between"><span>GST No.</span><span className="text-secondary font-medium">24ABJPA6641D2Z4</span></li>
+                      {factsLoading
+                        ? Array.from({ length: 5 }).map((_, i) => (
+                            <li key={i} className="flex justify-between">
+                              <Skeleton className="h-4 w-28" />
+                              <Skeleton className="h-4 w-32" />
+                            </li>
+                          ))
+                        : facts?.map((f) => (
+                            <li key={f.label} className="flex justify-between">
+                              <span>{f.label}</span>
+                              <span className="text-secondary font-medium">{f.value}</span>
+                            </li>
+                          ))}
                     </ul>
                   </div>
                 </div>
