@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { Plus, Pencil, Trash2, X } from "lucide-react";
+import { Plus, Pencil, Trash2, X, Upload, Image } from "lucide-react";
 import { toast } from "sonner";
 
 type Product = {
@@ -24,6 +24,30 @@ const AdminProducts = () => {
   const queryClient = useQueryClient();
   const [editing, setEditing] = useState<Product | null>(null);
   const [isNew, setIsNew] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleImageUpload = async (file: File) => {
+    setUploading(true);
+    try {
+      const ext = file.name.split(".").pop();
+      const fileName = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+      const { error: uploadError } = await supabase.storage
+        .from("product-images")
+        .upload(fileName, file, { cacheControl: "3600", upsert: false });
+      if (uploadError) throw uploadError;
+      const { data: { publicUrl } } = supabase.storage
+        .from("product-images")
+        .getPublicUrl(fileName);
+      if (editing) {
+        setEditing({ ...editing, image_url: publicUrl });
+      }
+    } catch (err: any) {
+      toast.error("Upload failed: " + err.message);
+    } finally {
+      setUploading(false);
+    }
+  };
 
   const { data: products, isLoading } = useQuery({
     queryKey: ["admin-products"],
@@ -147,7 +171,49 @@ const AdminProducts = () => {
                 </select>
               </div>
               <Field label="Tag" value={editing.tag ?? ""} onChange={(v) => setEditing({ ...editing, tag: v || null })} placeholder="e.g. Bestseller, New" />
-              <Field label="Image URL" value={editing.image_url ?? ""} onChange={(v) => setEditing({ ...editing, image_url: v || null })} />
+              
+              {/* Image Upload */}
+              <div>
+                <label className="font-body text-sm text-secondary font-medium mb-1 block">Product Image</label>
+                {editing.image_url && (
+                  <div className="mb-2 rounded-lg overflow-hidden border border-border w-24 h-24">
+                    <img src={editing.image_url} alt="Preview" className="w-full h-full object-cover" />
+                  </div>
+                )}
+                <div className="flex gap-2">
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) handleImageUpload(file);
+                      e.target.value = "";
+                    }}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => fileInputRef.current?.click()}
+                    disabled={uploading}
+                    className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-border bg-background font-body text-sm text-secondary hover:border-gold/30 disabled:opacity-50"
+                  >
+                    <Upload size={14} />
+                    {uploading ? "Uploading..." : "Upload Image"}
+                  </button>
+                  {editing.image_url && (
+                    <button
+                      type="button"
+                      onClick={() => setEditing({ ...editing, image_url: null })}
+                      className="px-3 py-2 rounded-lg border border-border bg-background font-body text-sm text-destructive hover:border-destructive/30"
+                    >
+                      Remove
+                    </button>
+                  )}
+                </div>
+                <Field label="" value={editing.image_url ?? ""} onChange={(v) => setEditing({ ...editing, image_url: v || null })} placeholder="Or paste image URL" />
+              </div>
+
               <Field label="Description" value={editing.description ?? ""} onChange={(v) => setEditing({ ...editing, description: v || null })} multiline />
               <Field label="Sort Order" value={String(editing.sort_order ?? 0)} onChange={(v) => setEditing({ ...editing, sort_order: Number(v) || 0 })} type="number" />
               <div className="flex gap-4">
