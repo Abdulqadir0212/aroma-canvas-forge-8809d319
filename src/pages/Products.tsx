@@ -102,6 +102,12 @@ const Products = () => {
                           loading="lazy"
                         />
                       )}
+                     {!item.image_url && (
+                       <div className="w-full h-full flex flex-col items-center justify-center text-muted-foreground/40">
+                         <ShoppingCart size={32} />
+                         <span className="text-xs mt-2 font-body">{item.category}</span>
+                       </div>
+                     )}
                       <span className="absolute top-3 left-3 bg-background/90 text-foreground font-body text-xs font-medium px-2.5 py-1 rounded-full">
                         {item.category}
                       </span>

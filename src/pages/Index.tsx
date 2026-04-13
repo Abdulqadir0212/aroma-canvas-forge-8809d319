@@ -85,6 +85,12 @@ const Index = () => {
                             loading="lazy"
                           />
                         )}
+                       {!item.image_url && (
+                         <div className="w-full h-full flex flex-col items-center justify-center text-muted-foreground/40">
+                           <ShoppingBag size={32} />
+                           <span className="text-xs mt-2 font-body">{item.category}</span>
+                         </div>
+                       )}
                         {item.tag && (
                           <span className="absolute top-3 left-3 bg-gold/90 text-primary-foreground font-body text-xs font-semibold px-3 py-1 rounded-full">
                             {item.tag}
