@@ -326,6 +326,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      is_order_owner: { Args: { _order_id: string }; Returns: boolean }
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
