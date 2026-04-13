@@ -6,6 +6,8 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import { Link } from "react-router-dom";
 import { useProducts } from "@/hooks/useDynamicContent";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useCart } from "@/hooks/useCart";
+import { ShoppingCart } from "lucide-react";
 
 const filters = ["All", "Attar", "Perfume", "Gift Set", "Incense"];
 
@@ -13,6 +15,7 @@ const Products = () => {
   const [activeFilter, setActiveFilter] = useState("All");
   const gridRef = useRef<HTMLDivElement>(null);
   const { data: products, isLoading } = useProducts(activeFilter);
+  const { addItem } = useCart();
 
   useEffect(() => {
     const el = gridRef.current;
@@ -108,7 +111,16 @@ const Products = () => {
                       {item.description && (
                         <p className="font-body text-muted-foreground text-xs mb-2 line-clamp-1">{item.description}</p>
                       )}
-                      <p className="font-body text-gold font-bold text-lg">₹{item.price.toLocaleString("en-IN")}</p>
+                      <div className="flex items-center justify-between">
+                        <p className="font-body text-gold font-bold text-lg">₹{item.price.toLocaleString("en-IN")}</p>
+                        <button
+                          onClick={() => addItem({ id: item.id, name: item.name, price: item.price, original_price: item.original_price, image_url: item.image_url })}
+                          className="w-8 h-8 rounded-full bg-gold/10 text-gold hover:bg-gold hover:text-primary-foreground transition-colors flex items-center justify-center"
+                          aria-label={`Add ${item.name} to cart`}
+                        >
+                          <ShoppingCart size={14} />
+                        </button>
+                      </div>
                     </div>
                   </div>
                 ))}

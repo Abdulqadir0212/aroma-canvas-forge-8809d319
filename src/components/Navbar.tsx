@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X, ShoppingBag } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import CartButton from "@/components/CartButton";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -53,6 +54,7 @@ const Navbar = () => {
         </ul>
 
         <div className="flex items-center gap-3">
+          <CartButton />
           <Link
             to="/products"
             className="hidden md:inline-flex items-center gap-2 bg-gradient-gold text-primary-foreground font-body font-semibold text-sm px-5 py-2.5 rounded-lg hover:opacity-90 transition-opacity"
