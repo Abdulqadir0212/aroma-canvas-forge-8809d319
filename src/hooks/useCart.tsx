@@ -29,6 +29,7 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | null>(null);
 
 function getSessionId(): string {
+  // Session ID is initialized by initSessionHeader() in main.tsx
   let sid = localStorage.getItem("cart_session_id");
   if (!sid) {
     sid = crypto.randomUUID();
