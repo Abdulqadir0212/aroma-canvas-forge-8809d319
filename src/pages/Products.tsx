@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useCallback } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
@@ -13,36 +13,8 @@ const filters = ["All", "Attar", "Perfume", "Gift Set", "Incense"];
 
 const Products = () => {
   const [activeFilter, setActiveFilter] = useState("All");
-  const gridRef = useRef<HTMLDivElement>(null);
-  const { data: products, isLoading } = useProducts(activeFilter);
+  const { data: products, isLoading, isError } = useProducts(activeFilter);
   const { addItem } = useCart();
-
-  useEffect(() => {
-    const el = gridRef.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("revealed");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.05, rootMargin: "0px 0px -30px 0px" }
-    );
-
-    const timer = setTimeout(() => {
-      const items = el.querySelectorAll(".reveal-item");
-      items.forEach((item) => observer.observe(item));
-    }, 50);
-
-    return () => {
-      clearTimeout(timer);
-      observer.disconnect();
-    };
-  }, [activeFilter, products]);
 
   const handleFilter = useCallback((f: string) => {
     setActiveFilter(f);
@@ -75,7 +47,7 @@ const Products = () => {
             ))}
           </div>
 
-          <div ref={gridRef} className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 max-w-6xl mx-auto">
             {isLoading
               ? Array.from({ length: 8 }).map((_, i) => (
                   <div key={i} className="bg-card rounded-xl overflow-hidden border border-border">
@@ -87,27 +59,34 @@ const Products = () => {
                     </div>
                   </div>
                 ))
-              : products?.map((item, i) => (
+              : isError
+              ? (
+                <div className="col-span-full text-center py-12">
+                  <p className="font-body text-muted-foreground">Something went wrong. Please try again later.</p>
+                </div>
+              )
+              : products && products.length > 0
+              ? products.map((item, i) => (
                   <div
                     key={`${activeFilter}-${item.id}`}
-                    className="reveal-item opacity-0 translate-y-8 transition-all duration-500 group bg-card rounded-xl overflow-hidden border border-border hover:border-gold/30 hover-scale"
-                    style={{ transitionDelay: `${i * 40}ms` }}
+                    className="animate-fade-in-up group bg-card rounded-xl overflow-hidden border border-border hover:border-gold/30 hover-scale"
+                    style={{ animationDelay: `${i * 40}ms`, animationFillMode: 'forwards' }}
                   >
                     <div className="relative aspect-square overflow-hidden bg-muted">
-                      {item.image_url && (
+                      {item.image_url ? (
                         <img
                           src={item.image_url}
                           alt={item.name}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                           loading="lazy"
+                          onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
                         />
+                      ) : (
+                        <div className="w-full h-full flex flex-col items-center justify-center text-muted-foreground/40">
+                          <ShoppingCart size={32} />
+                          <span className="text-xs mt-2 font-body">{item.category}</span>
+                        </div>
                       )}
-                     {!item.image_url && (
-                       <div className="w-full h-full flex flex-col items-center justify-center text-muted-foreground/40">
-                         <ShoppingCart size={32} />
-                         <span className="text-xs mt-2 font-body">{item.category}</span>
-                       </div>
-                     )}
                       <span className="absolute top-3 left-3 bg-background/90 text-foreground font-body text-xs font-medium px-2.5 py-1 rounded-full">
                         {item.category}
                       </span>
@@ -129,7 +108,13 @@ const Products = () => {
                       </div>
                     </div>
                   </div>
-                ))}
+                ))
+              : (
+                <div className="col-span-full text-center py-12">
+                  <ShoppingCart size={40} className="mx-auto text-muted-foreground/30 mb-3" />
+                  <p className="font-body text-muted-foreground">No products found.</p>
+                </div>
+              )}
           </div>
 
           <div className="text-center mt-16">
