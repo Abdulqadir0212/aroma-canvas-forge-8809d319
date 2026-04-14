@@ -140,6 +140,7 @@ export type Database = {
           payment_method: string | null
           payment_status: string | null
           pincode: string
+          session_token: string | null
           shipping_address: string
           state: string
           status: string
@@ -158,6 +159,7 @@ export type Database = {
           payment_method?: string | null
           payment_status?: string | null
           pincode: string
+          session_token?: string | null
           shipping_address: string
           state: string
           status?: string
@@ -176,6 +178,7 @@ export type Database = {
           payment_method?: string | null
           payment_status?: string | null
           pincode?: string
+          session_token?: string | null
           shipping_address?: string
           state?: string
           status?: string
