@@ -4,7 +4,13 @@ import { supabase } from "@/integrations/supabase/client";
 export function useProducts(filter?: string) {
   return useQuery({
     queryKey: ["products", filter],
-    queryFn: async () => {
+    queryFn: async ({ signal }) => {
+      const timeout = setTimeout(() => {
+        if (signal && !signal.aborted) {
+          // AbortController will handle this via tanstack
+        }
+      }, 8000);
+
       let query = supabase
         .from("products")
         .select("*")
@@ -15,9 +21,12 @@ export function useProducts(filter?: string) {
       }
 
       const { data, error } = await query;
+      clearTimeout(timeout);
       if (error) throw error;
-      return data;
+      return data ?? [];
     },
+    staleTime: 5 * 60 * 1000,
+    retry: 2,
   });
 }
 
@@ -32,8 +41,10 @@ export function useBestsellers() {
         .order("sort_order", { ascending: true })
         .limit(6);
       if (error) throw error;
-      return data;
+      return data ?? [];
     },
+    staleTime: 5 * 60 * 1000,
+    retry: 2,
   });
 }
 
