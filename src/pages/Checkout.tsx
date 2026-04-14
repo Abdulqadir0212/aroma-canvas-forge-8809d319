@@ -40,36 +40,28 @@ const Checkout = () => {
 
       const orderId = crypto.randomUUID();
 
-      const { error: orderErr } = await supabase.from("orders").insert({
-        id: orderId,
-        user_id: userId || null,
-        customer_name: form.customer_name,
-        customer_email: form.customer_email || null,
-        customer_phone: form.customer_phone,
-        shipping_address: form.shipping_address,
-        city: form.city,
-        state: form.state,
-        pincode: form.pincode,
-        notes: form.notes || null,
-        total_amount: totalAmount,
-        payment_method: "cod",
-        status: "pending",
-        payment_status: "pending",
-      });
-
-      if (orderErr) throw orderErr;
-
       const orderItems = items.map((item) => ({
-        order_id: orderId,
         product_id: item.product_id,
         product_name: item.name,
         quantity: item.quantity,
-        unit_price: item.price,
-        total_price: item.price * item.quantity,
       }));
 
-      const { error: itemsErr } = await supabase.from("order_items").insert(orderItems);
-      if (itemsErr) throw itemsErr;
+      const { error: rpcErr } = await supabase.rpc("create_order_with_items", {
+        _order_id: orderId,
+        _user_id: userId || null,
+        _customer_name: form.customer_name,
+        _customer_email: form.customer_email || null,
+        _customer_phone: form.customer_phone,
+        _shipping_address: form.shipping_address,
+        _city: form.city,
+        _state: form.state,
+        _pincode: form.pincode,
+        _notes: form.notes || null,
+        _total_amount: totalAmount,
+        _items: orderItems,
+      });
+
+      if (rpcErr) throw rpcErr;
 
       await clearCart();
       toast.success("Order placed successfully!");
